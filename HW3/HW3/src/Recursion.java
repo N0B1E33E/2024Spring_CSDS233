@@ -71,12 +71,5 @@ public class Recursion {
 			return binomial(n-1, k-1) * n / k;
 		
 	}
-	public static void main(String args[]){
-		Recursion a = new Recursion();
-		System.out.println(a.sumDigit(321));
-		System.out.println(a.sumDigit(563403245));
-		System.out.println(a.gcd(36, 24));
-		System.out.println(a.isPalindrome("abbbbbba"));
-		System.out.println(a.binomial(15, 5));
-	}
+
 }
