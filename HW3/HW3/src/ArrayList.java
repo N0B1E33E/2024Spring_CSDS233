@@ -77,13 +77,29 @@ public class ArrayList {
         return sum/(size - 1);
     }
 
-    /*public LinkedList sublist(int lower, int upper){
+    public ArrayList sublist(int lower, int upper){
+        ArrayList temp = new ArrayList();
+        for(int i = 0; i < list.length; i++){
+            if(list[i] >= lower && list[i] <= upper){
+                temp.add(list[i]);
+            }
+        }
+        return temp;
+    }
 
-    } */
+    private ArrayList sublist(double lower, double upper){
+        ArrayList temp = new ArrayList();
+        for(int i = 0; i < list.length; i++){
+            if(list[i] >= lower && list[i] <= upper)
+                temp.add(list[i]);
+        }
+        return temp;
+    }
 
-
-/*public LinkedList removeNoise(){
-
-} */
+    public ArrayList removeNoise(){
+        double mean = this.mean();
+        double sd = Math.sqrt(this.variance());
+        return this.sublist(mean - 3 * sd, mean + 3 * sd);
+    }
     
 }
