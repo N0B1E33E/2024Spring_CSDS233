@@ -1,0 +1,21 @@
+INDEX VERSION 1.130+D:\CWRU\Second Year\CSDS 233\2024SpringDataStructure\HW3\.metadata\.plugins\org.eclipse.jdt.core
+3040837599.index
+4135958314.index
+2066830214.index
+1961815414.index
+674573568.index
+4138326577.index
+411227453.index
+3348520720.index
+2507423472.index
+1793460888.index
+1956904976.index
+4259073463.index
+103378668.index
+895354549.index
+2885606711.index
+1946725198.index
+542153213.index
+3644761064.index
+2486966779.index
+2205283528.index
