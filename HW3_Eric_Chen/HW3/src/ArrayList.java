@@ -1,4 +1,4 @@
-import java.util.Arrays;
+//import java.util.Arrays;
 public class ArrayList {
     private static final int DEFAULT_CAPACITY = 1;
     private int[] list;
@@ -27,7 +27,12 @@ public class ArrayList {
     }
 
     private void increaseLength(){
-        list = Arrays.copyOf(list, list.length * 2);
+        //list = Arrays.copyOf(list, list.length * 2);
+        int[] temp = new int[list.length * 2];
+        for(int i = 0; i < list.length; i++){
+            temp[i] = list[i];
+        }
+        list = temp;
     }
 
     public int indexof(int n){
