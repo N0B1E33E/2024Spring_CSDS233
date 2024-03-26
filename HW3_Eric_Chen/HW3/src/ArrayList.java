@@ -84,10 +84,8 @@ public class ArrayList {
 
     public ArrayList sublist(int lower, int upper){
         ArrayList temp = new ArrayList();
-        for(int i = 0; i < list.length; i++){
-            if(list[i] >= lower && list[i] <= upper){
-                temp.add(list[i]);
-            }
+        for(int i = lower; i <= upper; i++){
+            temp.add(list[i]);
         }
         return temp;
     }

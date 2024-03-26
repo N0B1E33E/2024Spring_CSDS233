@@ -145,9 +145,37 @@ public class LinkedList {
     }
 
     public LinkedList sublist(int lower, int upper){
-
+        Node ptr = list.getFirst();
+        LinkedList tempList = new LinkedList();
+        if(lower < 0 || upper < 0 || upper < lower){
+            throw new IllegalArgumentException();
+        }
+        else{
+            for(int i = 0; i < lower; i ++){
+                ptr = ptr.getNext();
+            }
+            for(int i = lower; i <= upper; i++){
+                ptr = ptr.getNext();
+                tempList.add(ptr.getValue());
+            }
+        }
+        tempList.size = upper - lower + 1;
+        return tempList;
     }
 
+    public LinkedList removeNoise(){
+        Node ptr = list.getFirst();
+        LinkedList tempList = new LinkedList();
+        double lower = this.mean() - 3 * Math.pow(this.Variance(),0.5);
+        double upper = this.mean() + 3 * Math.pow(this.Variance(),0.5);
+        for(int i = 0; i < list.size; i++){
+            if(ptr.getValue() >= lower && ptr.getValue() <= upper){
+                tempList.add(ptr.getValue());
+                tempList.size++;
+            }
+        }
+        return tempList;
+    }
 
 
 }
