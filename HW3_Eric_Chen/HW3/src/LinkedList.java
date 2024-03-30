@@ -3,7 +3,7 @@ public class LinkedList {
     private Node first = null;
     private LinkedList list = null;
     private int size = 0;
-    
+
     /*
      * private helper method that get access to the head of the linked list
      */
