@@ -29,6 +29,16 @@ public class RecursionTest {
 		assertFalse(a.isPalindrome("abcdba"));
 		assertTrue(a.isPalindrome("abbbbbbba"));
 	}
+
+	@Test
+	public void swapNodesInPairsTest(){
+		LinkedList list = new LinkedList();
+		for(int i = 0; i < 5; i++){
+			list.add(i + 1);
+		}
+		Node temp = a.swapNodesInPairs(list.getFirst());
+		assertEquals(2, temp.getValue());
+	}
 	
 	@Test
 	public void binomialTest(){

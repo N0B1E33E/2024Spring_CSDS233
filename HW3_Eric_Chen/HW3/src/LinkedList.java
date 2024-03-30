@@ -6,7 +6,7 @@ public class LinkedList {
     /*
      * private helper method that get access to the head of the linked list
      */
-    private Node getFirst(){
+    public Node getFirst(){
         return this.first;
     }
 
@@ -18,12 +18,11 @@ public class LinkedList {
     }
 
     public void add(int n){
-        Node ptr = list.getFirst();
         if(list == null){
-            Node head = new Node(n,null);
-            list.setFirst(head);
+            list.setFirst(new Node(n,null));
         }
         else{
+            Node ptr = list.getFirst();
             for(int i = 0; i < this.size; i ++){
                 ptr = ptr.getNext();
             }
@@ -92,7 +91,7 @@ public class LinkedList {
     }
 
 
-    public void remove(int n){
+    public void remove2(int n){
         Node ptr = list.getFirst().getNext();
         if(list.getFirst().getValue() == n){
             list.setFirst(list.getFirst().getNext());

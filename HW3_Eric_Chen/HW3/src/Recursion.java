@@ -47,11 +47,24 @@ public class Recursion {
 		}
 	}
 	
-	
-	/**public Node swapNodesInPairs(Node head){
-		return null;
+	/**
+	 * public method that takes one Node input, return the head of a new LinkedList that is the original linked with nodes swapped for every two nodes.
+	 * @param head head of the input linked list
+	 * @return head of a new linked list after swapping
+	 * 
+	 */
+	public Node swapNodesInPairs(Node head){
+		if(head == null || head.getNext() == null)
+			return head;
+		else{
+			Node temp = head.getNext().getNext();
+			head.getNext().setNext(head);
+			head.setNext(temp);
+			return swapNodesInPairs(head.getNext());
+		}
+		
 	}
-	**/
+
 	
 	/**
 	 * public method that uses recursion C(n,k) = n/k * C(n-1,k-1) to calculate the number of 
