@@ -1,3 +1,5 @@
+import java.lang.Math;
+
 public class ArrayList {
     
     private int[] list;
@@ -20,9 +22,8 @@ public class ArrayList {
             throw new IllegalArgumentException();
         }
         ensureCapacity();
-        if(index > size) {
-            list[size] = n;
-            size++;
+        if(index >= size) {
+            add(n);
         }
         else {
             for(int i = size; i >= index; i--) {
@@ -51,27 +52,33 @@ public class ArrayList {
         if(index > size - 1) {
             int save = list[size - 1];
             list[size - 1] = 0;
+            size--;
             return save;
         }
         else {
             int save = list[index];
-            for(int i = index; i < size - 1; i++) {
+            for(int i = index; i < size; i++) {
                 list[i] = list[i + 1];
             }
+            size--;
             return save;
         }
     }
 
     public void removeValue(int n) {
-        for(int i = indexof(n); i < size - 1; i++) {
-            list[i] = list[i + 1];
+        if(this.indexof(n) < size) {
+            for(int i = indexof(n); i < size; i++) {
+             list[i] = list[i + 1];
+            }   
+            size--;
         }
     }
 
     public void removeall(int n) {
-        for(int number : list) {
-            if(number == n) {
-                removeValue(n);
+        for(int i = 0; i < size; i++) {
+            if(this.getValue(i) == n) {
+                remove(i);
+                i--;
             }
         }
     }
@@ -85,11 +92,16 @@ public class ArrayList {
     }
 
     public double variance() {
-        double summation = 0;
-        for(int number : list) {
-            summation = (number - this.mean()) * (number - this.mean());
+        if(size == 0) {
+            return Double.NaN;
         }
-        return summation /= (size - 1);
+        else {
+            double summation = 0;
+            for(int i = 0; i < size; i++) {
+               summation += (Math.pow((this.getValue(i)- this.mean()), 2.0));
+            }
+            return summation /= (size - 1);
+        }
     }
 
     public ArrayList sublist(int lower, int upper) {
@@ -105,9 +117,10 @@ public class ArrayList {
 
     public ArrayList removeNoise() {
         double stanDev = Math.sqrt(this.variance());
-        for(int number : list) {
-            if(number > (this.mean() + (3 * stanDev)) || number < (this.mean() - (3 * stanDev))) {
-                this.remove(number);
+        double mean = this.mean();
+        for(int i = 0; i < size; i++) {
+            if(this.getValue(i) > (mean + (3 * stanDev)) || this.getValue(i) < (mean - (3 * stanDev))) {
+                this.remove(i);
             }
         }
         return this;
@@ -121,6 +134,18 @@ public class ArrayList {
             }
             list = temp;
         }
+    }
+
+    public int getValue(int index) {
+        return list[index];
+    }
+
+    public int[] getList() {
+        return list;
+    }
+
+    public int getSize() {
+        return size;
     }
 
 }
