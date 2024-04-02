@@ -146,7 +146,6 @@ public class ArrayListTester {
         assertEquals(3, a2.getValue(500));
         a2.removeall(2);
         assertEquals(3, a2.getValue(1));
-
         assertEquals(2, a2.getSize());
 
         // edge case - removing a nonexisting element does not affect list
@@ -209,7 +208,8 @@ public class ArrayListTester {
         for(int i = 1; i <= 4; i++) {
             a1.add(i);
         }
-        a1 = a1.sublist(1, 2);
+        a1 = a1.sublist(2, 3);
+        assertEquals(2, a1.getSize());
         assertEquals(2, a1.getValue(0));
         assertEquals(3, a1.getValue(1));
 
@@ -218,7 +218,8 @@ public class ArrayListTester {
         for(int i = 1; i < 1000; i++) {
             a2.add(i);
         }
-        a2 = a2.sublist(249, 749);
+        a2 = a2.sublist(250, 750);
+        assertEquals(501, a2.getSize());
         assertEquals(250, a2.getValue(0));
         assertEquals(750, a2.getValue(500));
 
@@ -227,10 +228,10 @@ public class ArrayListTester {
         for(int i = 1; i <= 4; i++) {
             a3.add(i);
         }
-        a3 = a3.sublist(0, 3);
+        a3 = a3.sublist(0, 5);
         assertEquals(4, a3.getSize());
         a3 = a3.sublist(0, 0);
-        assertEquals(1, a3.getValue(0));
+        assertEquals(0, a3.getValue(0));
     }
 
     @Test 
@@ -243,9 +244,9 @@ public class ArrayListTester {
         }
         assertEquals(50, a1.getSize());
         assertEquals(4, a1.getValue(0));
-        a1 = a1.removeNoise();
-        assertEquals(49, a1.getSize());
-        assertEquals(5, a1.getValue(0));
+        ArrayList removed1 = a1.removeNoise();
+        assertEquals(49, removed1.getSize());
+        assertEquals(5, removed1.getValue(0));
 
         // complicated case
         ArrayList a2 = new ArrayList();
