@@ -34,7 +34,7 @@ public class LinkedList {
         }
         else {
             Node iterate = firstNode;
-            for(int i = 0; i < index; i++) {
+            for(int i = 0; i < index - 1; i++) {
                 iterate = iterate.getNext();
             }
             Node save = iterate.getNext();
@@ -62,7 +62,13 @@ public class LinkedList {
         }
         Node iterate = firstNode;
         int save;
-        if(index > size - 1) {
+        if(index == 0) {
+            save = firstNode.getData();
+            firstNode = iterate.getNext();
+            size--;
+            return save;
+        }
+        else if(index >= size - 1) {
             while(iterate.getNext().getNext() != null) {
                 iterate = iterate.getNext();
             }
@@ -72,7 +78,7 @@ public class LinkedList {
             return save;
         }
         else {
-            for(int i = 0; i < index; i++) {
+            for(int i = 0; i < index - 1; i++) {
                 iterate = iterate.getNext();
             }
             save = iterate.getNext().getData();
@@ -83,22 +89,21 @@ public class LinkedList {
     }
 
     public void removeValue(int n) {
-        int index = indexof(n);
-        remove(index);
+        if(this.indexof(n) != -1) {
+            remove(indexof(n));
+        }
     }
 
     public void removeall(int n) {
-        int index = indexof(n);
         while(indexof(n) != -1) {
-            remove(index);
-            index = indexof(n);
+            remove(indexof(n));
         }
     }
 
     public double mean() {
         double sum = 0;
         Node iterate = firstNode;
-        while(iterate.getNext() != null) {
+        while(iterate != null) {
             sum += iterate.getData();
             iterate = iterate.getNext();
         }
@@ -106,37 +111,50 @@ public class LinkedList {
     }
 
     public double variance() {
-        double summation = 0;
-        Node iterate = firstNode;
-        while(iterate.getNext() != null) {
-            summation += ((iterate.getData() - this.mean()) * (iterate.getData() - this.mean()));
-            iterate = iterate.getNext();
+        if(size == 0) {
+            return Double.NaN;
         }
-        return summation /= (size - 1);
+        else {
+            double summation = 0;
+            Node iterate = firstNode;
+            while(iterate != null) {
+                summation += ((iterate.getData() - this.mean()) * (iterate.getData() - this.mean()));
+                iterate = iterate.getNext();
+            }
+            return summation /= (size - 1);
+        }
     }
 
     public LinkedList sublist(int lower, int upper) {
+        LinkedList temp = new LinkedList();
         Node iterate = firstNode;
-        for(int i = 0; i < lower; i++) {
+        while(iterate != null) {
+            int current = iterate.getData();
+            if(current >= lower && current <= upper) {
+                temp.add(current);
+            }
             iterate = iterate.getNext();
         }
-        firstNode = iterate.getNext();
-        for(int i = lower; i <= upper; i++) {
-            iterate = iterate.getNext();
-        }
-        iterate.setNext(null);
-        return this;
+        return temp;
     }
 
     public LinkedList removeNoise() {
+        LinkedList temp = new LinkedList();
         double stanDev = Math.sqrt(this.variance());
         Node iterate = firstNode;
-        while(iterate.getNext() != null) {
-            if(iterate.getData() > (this.mean() + (3 * stanDev)) || iterate.getData() < (this.mean() - (3 * stanDev))) {
-                remove(iterate.getData());
-            }
+        if(size <= 1) {
+            return this;
         }
-        return this;
+        else {
+            while(iterate != null) {
+                int current = iterate.getData();
+                if(current >= (this.mean() - (3 * stanDev)) && current <= (this.mean() + (3 * stanDev))) {
+                    temp.add(current);
+                }
+                iterate = iterate.getNext();
+            }
+            return temp;
+        }
     }
     
     public Node getFirstNode() {
@@ -153,32 +171,6 @@ public class LinkedList {
 
     public int getSize() {
         return size;
-    }
-
-    private class Node {
-        private int data;
-        private Node next;
-
-        private Node(int data) {
-            this(data, null);
-        }
-
-        private Node(int data, Node next) {
-            this.data = data;
-            this.next = next;
-        }
-
-        private int getData() {
-            return this.data;
-        }
-
-        private Node getNext() {
-            return this.next;
-        }
-
-        private void setNext(Node next) {
-            this.next = next;
-        }
     }
 
 }
