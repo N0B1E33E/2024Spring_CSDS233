@@ -46,7 +46,7 @@ public class LinkedList {
         int index = -1;
         int count = 0;
         Node iterate = firstNode;
-        while(iterate.getNext() != null && index == -1) {
+        while(iterate != null && index == -1) {
             if(iterate.getData() == n) {
                 index = count;
             }
