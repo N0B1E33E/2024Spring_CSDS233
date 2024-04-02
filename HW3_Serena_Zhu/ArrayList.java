@@ -105,25 +105,32 @@ public class ArrayList {
     }
 
     public ArrayList sublist(int lower, int upper) {
-        int[] temp = new int[list.length];
-        int count = 0;
-        for(int i = lower; i <= upper; i++) {
-            temp[count] = list[i];
-            count++;
+        ArrayList temp = new ArrayList();
+        for(int i = 0; i < size; i++) {
+            int current = this.getValue(i);
+            if((current) >= lower && current <= upper) {
+                temp.add(current);
+            }
         }
-        list = temp;
-        return this;
+        return temp;
     }
 
     public ArrayList removeNoise() {
+        ArrayList temp = new ArrayList();
         double stanDev = Math.sqrt(this.variance());
         double mean = this.mean();
-        for(int i = 0; i < size; i++) {
-            if(this.getValue(i) > (mean + (3 * stanDev)) || this.getValue(i) < (mean - (3 * stanDev))) {
-                this.remove(i);
-            }
+        if(size <= 1) {
+            return this;
         }
-        return this;
+        else {
+            for(int i = 0; i < size; i++) {
+                int current = this.getValue(i);
+                if(current >= (mean - (3 * stanDev)) && current <= (mean + (3 * stanDev))) {
+                    temp.add(current);
+                }
+            }
+            return temp;
+        }
     }
 
     private void ensureCapacity() {
