@@ -1,11 +1,11 @@
 public class Recursion {
 
     public int sumDigits(int n) {
-        if(n == 1) {
+        if(n < 10) {
             return n;
         }
         else {
-            return n + sumDigits(n - 1);
+            return (n % 10) + sumDigits(n / 10);
         }
     }
 
@@ -22,20 +22,6 @@ public class Recursion {
     }
 
     public boolean isPalindrome(String str) {
-        /*
-        if(str.length() <= 3) {
-            return str.charAt(0) == str.charAt(str.length() - 1);
-        }
-        else {
-            if(str.charAt(0) == str.charAt(str.length() - 1)) {
-                return isPalindrome(str.substring(1, str.length() - 2));
-            }
-            else {
-                return false;
-            }
-        }
-        */
-
         if(str.length() == 1 || str.length() == 0) {
             return true;
         }
@@ -45,14 +31,20 @@ public class Recursion {
         else {
             return false;
         }
-
     }
 
-    /*
     public Node swapNodesInPairs(Node head) {
-        
+        if(head == null || head.getNext() == null) {
+            return head;
+        }
+        else {
+            Node save = head.getNext();
+            head.setNext(swapNodesInPairs(head.getNext().getNext()));
+            save.setNext(head);
+            head = save;
+            return head;
+        }
     }
-    */
 
     public int binomial(int n, int k) {
         if(n < 0 || k < 0) {
