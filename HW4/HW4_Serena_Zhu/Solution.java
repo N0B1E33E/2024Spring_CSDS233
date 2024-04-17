@@ -43,10 +43,12 @@ public class Solution {
         int endHalfIndex1 = mid;
         int beginHalfIndex2 = mid + 1;
         int endHalfIndex2 = last;
-        double beginHalf1 = magnitude(a, first);
-        double beginHalf2 = magnitude(a, mid + 1);
+        //double beginHalf1 = magnitude(a, beginHalfIndex1);
+        //double beginHalf2 = magnitude(a, beginHalfIndex2);
         int index = 0;
         while(beginHalfIndex1 <= endHalfIndex1 && beginHalfIndex2 <= endHalfIndex2) {
+            double beginHalf1 = magnitude(a, beginHalfIndex1);
+            double beginHalf2 = magnitude(a, beginHalfIndex2);
             if(beginHalf1 <= beginHalf2) {
                 temp[index] = first;
                 beginHalfIndex1++;
@@ -71,10 +73,13 @@ public class Solution {
         for(int i = 0; i < copy.length; i++) {
             copy[i][0] = a[temp[i]][0];
             copy[i][1] = a[temp[i]][1];
+            System.out.println("copy: x: " + copy[i][0] + " + y: " + copy[i][1]);
         }
-        for(int i = 0; i < copy.length; i++) {
-            a[i][0] = copy[i][0];
-            a[i][1] = copy[i][1];
+        int copyIndex = 0;
+        for(int i = first; i < last + 1; i++) {
+            a[i][0] = copy[copyIndex][0];
+            a[i][1] = copy[copyIndex][1];
+            copyIndex++;
             System.out.println("F: " + first + "  last: " + last);
             System.out.println(a[i][0] + " " + a[i][1]);
         }
