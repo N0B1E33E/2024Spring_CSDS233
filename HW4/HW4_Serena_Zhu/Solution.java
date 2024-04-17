@@ -4,15 +4,6 @@ import java.util.Arrays;
 public class Solution {
     
     public int[][] kClosest(int[][] points, int k) {
-        //double[] magnitudes = new double[points.length];
-        /*
-        for(int i = 0; i < magnitudes.length; i++) {
-            int x = points[i][0];
-            int y = points[i][1];
-            magnitudes[i] = Math.sqrt(((233 - x) * (233 - x)) + ((233 - y) * (233 - y)));
-        }
-        */
-
         mergeSort(points, 0, points.length - 1);
         int[][] returnArr = new int[k][2];
         for(int i = 0; i < k; i++) {
@@ -43,18 +34,18 @@ public class Solution {
         int endHalfIndex1 = mid;
         int beginHalfIndex2 = mid + 1;
         int endHalfIndex2 = last;
-        //double beginHalf1 = magnitude(a, beginHalfIndex1);
-        //double beginHalf2 = magnitude(a, beginHalfIndex2);
+        double beginHalf1 = magnitude(a, beginHalfIndex1);
+        double beginHalf2 = magnitude(a, beginHalfIndex2);
         int index = 0;
         while(beginHalfIndex1 <= endHalfIndex1 && beginHalfIndex2 <= endHalfIndex2) {
-            double beginHalf1 = magnitude(a, beginHalfIndex1);
-            double beginHalf2 = magnitude(a, beginHalfIndex2);
+            beginHalf1 = magnitude(a, beginHalfIndex1);
+            beginHalf2 = magnitude(a, beginHalfIndex2);
             if(beginHalf1 <= beginHalf2) {
-                temp[index] = first;
+                temp[index] = beginHalfIndex1;
                 beginHalfIndex1++;
             }
             else {
-                temp[index] = mid + 1;
+                temp[index] = beginHalfIndex2;
                 beginHalfIndex2++;
             }
             index++;
