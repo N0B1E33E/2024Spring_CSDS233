@@ -22,6 +22,10 @@ public class SolutionTester {
         int[][] a4 = new int[][] {{0, 0}, {1, 1}, {200, 200}, {200, 233}, {233, 200}, {300, 300}};
         int[][] expect4 = new int[][] {{200, 233}, {233, 200}};
         assertArrayEquals(expect4, s.kClosest(a4, 2));
+
+        int[][] a5 = new int[][] {{0, 0}, {1, 1}, {200, 200}, {200, 233}, {233, 200}, {300, 300}};
+        int[][] expect5 = new int[][] {{200, 233}, {233, 200}, {200, 200}};
+        assertArrayEquals(expect5, s.kClosest(a5, 3));
     }
 
 }
